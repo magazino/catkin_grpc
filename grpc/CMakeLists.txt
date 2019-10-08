@@ -2,7 +2,15 @@ cmake_minimum_required(VERSION 2.8.12)
 include(ExternalProject)
 project(grpc)
 
-add_compile_options(-std=c++11)
+if(CMAKE_VERSION VERSION_LESS "3.1")
+  if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
+  else()
+    message(SEND_ERROR "Error: Can not enable C++ 11 for gRPC")
+  endif()
+else()
+  set(CMAKE_CXX_STANDARD 11)
+endif()
 
 find_package(catkin REQUIRED)
 
@@ -35,7 +43,7 @@ set(PROTOBUF_URL https://github.com/protocolbuffers/protobuf/archive/${PROTOBUF_
 set(ZLIB_URL https://github.com/madler/zlib/archive/${ZLIB_TAG}.tar.gz)
 
 catkin_package(
-  CFG_EXTRAS generate_proto.cmake
+  CFG_EXTRAS exported_variables.cmake generate_proto.cmake
 )
 
 find_program(RSYNC rsync)
