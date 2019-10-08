@@ -160,17 +160,17 @@ add_custom_command(
       --include="*/" --include="*.h" --exclude="*"
       ${CMAKE_CURRENT_BINARY_DIR}/grpc_build/include/
       ${GRPC_INCLUDE_DESTINATION}/
-  COMMAND
-    ${RSYNC}
-      --prune-empty-dirs --archive
-      --include="*/" --include="*.h" --include="*.proto" --exclude="*"
-      ${CMAKE_CURRENT_BINARY_DIR}/grpc_build/third_party/protobuf/src/
-      ${GRPC_INCLUDE_DESTINATION}/
+#  COMMAND
+#    ${RSYNC}
+#      --prune-empty-dirs --archive
+#      --include="*/" --include="*.h" --include="*.proto" --exclude="*"
+#      ${CMAKE_CURRENT_BINARY_DIR}/grpc_build/third_party/protobuf/src/
+#      ${GRPC_INCLUDE_DESTINATION}/
 )
 
 install(
   DIRECTORY
-    ${GRPC_INCLUDE_DESTINATION}/google
+#    ${GRPC_INCLUDE_DESTINATION}/google
     ${GRPC_INCLUDE_DESTINATION}/grpc
     ${GRPC_INCLUDE_DESTINATION}/grpc++
     ${GRPC_INCLUDE_DESTINATION}/grpcpp
